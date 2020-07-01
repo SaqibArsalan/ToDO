@@ -23,6 +23,7 @@ router.get('/',cors.corsWithOptions,authenticate.verifyUser, function(req, res, 
 
 
 router.post('/signup',cors.corsWithOptions, function(req,res,next) {
+    console.log("sign up is hit");
   User.register(new User({username: req.body.username}),
    req.body.password, (err,user) => {
      if(err) {

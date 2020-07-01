@@ -14,25 +14,16 @@
 			<img src="img/mobile.svg">
 		</div>
 		<div class="login-content">
-			<form id="form-submit">
+			<form action="login.html" id="form-submit">
 				<img src="img/avatar.svg">
-                <h2 class="title">Welcome</h2>
+				<h2 class="title">Welcome</h2>
            		<div class="input-div one">
            		   <div class="i">
            		   		<i class="fas fa-user"></i>
            		   </div>
            		   <div class="div">
            		   		<h5>Username</h5>
-           		   		<input type="text" class="input">
-           		   </div>
-           		</div>
-                <div class="input-div one">
-           		   <div class="i">
-           		   		<i class="fas fa-user"></i>
-           		   </div>
-           		   <div class="div">
-           		   		<h5>Email Address</h5>
-						<input id="email" type="Email" name="email" class="input" required>
+           		   		<input id= "username" type="text" class="input" required>
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -41,29 +32,17 @@
            		   </div>
            		   <div class="div">
            		    	<h5>Password</h5>
-           		    	<input id="password" type="password" name="password" class="input" required>
-                    </div>
+           		    	<input id= "password" type="password" class="input" required>
+				   </div>  
             	</div>
-                <div class="input-div pass">
-           		   <div class="i"> 
-           		    	<i class="fas fa-lock"></i>
-           		   </div>
-           		   <div class="div">
-           		    	<h5>Confirm Password</h5>
-           		    	<input id="confirm_password" type="password" class="input">
-						<div id="checkpass"> </div>
-                    </div>       
-            	</div>
-                <div class="message"> Already Registered? <a href="#">Login </a>
-                </div>            	
-                <input id="reg" type="submit" class="btn" formmethod="POST" value="Register">
-            </form>
+				<div id="error"></div>
+            	<input type="submit" class="btn" value="register">
+			</form>
         </div>
     </div>
 
 	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="js/login.js"></script>
-	<script src="js/registration.js"> </script>
+	<script type="text/javascript" src="js/registration.js"></script>
 	
 	</body>
 </html>

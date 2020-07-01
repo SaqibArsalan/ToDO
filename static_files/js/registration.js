@@ -1,30 +1,31 @@
-$(document).ready(function(){
 
-    $("#form-submit").submit(function(e) {
-        var emp_id = $("#employee").val();
-        var formData = {
-            'username' : $("#email").val(),
-            'password': $("#password").val()
-        }
-        if($('#password').val() ==  $('#confirm_password').val()) {
+$(document).ready(()=>{
+    $('#form-submit').submit(function(e){
+        e.preventDefault();
+        console.log("the username is ", $("#username").val());
+        var self = this;
 
         $.ajax({
             url: '/users/signup',
             type: 'POST',
-            data: formData,
-            dataType: 'json',
-            success: (data) => {
-                window.location.reload();
+            data: {
+                username: $('#username').val(),
+                password: $('#password').val()
+            }
+        }).done(function(result){
+            console.log("the result is ", result);
+            if (result.success){
+                self.submit();
+                console.log("everything is good!");
+                
+            }
+            else $('#error').text("SignUp Unsuccessful! Please Try again");
 
-            }				
+            
+        }).fail(function() {
+            window.alert('SignUp Unsuccessful! Please Try again ');
         });
-        }
-        else {
-            $("#checkpass").html("Password does not match");
-        }
-        e.preventDefault();
-    });  
-
+    
+    });
 });
-
 	

@@ -5,11 +5,30 @@ const bodyParser = require('body-parser');
 
 router.use(bodyParser.urlencoded({extended:true}));
 
-//all tasks
+//To Do tasks
 router.get('/', async (req, res) => {
     try {
-        const tasks = await ToDo.find();
-        res.json(tasks);
+        const tasks = await ToDo.find({status: false});
+        res.status(200).json({
+            data: tasks,
+            status: true
+        });
+    } catch (err) {
+        res.status(400).json({
+            message: err
+        });
+
+    }
+});
+
+//Completed Tasks
+router.get('/completed', async (req, res) => {
+    try {
+        const tasks = await ToDo.find({status: true});
+        res.status(200).json({
+            data: tasks,
+            status: true
+        });
     } catch (err) {
         res.status(400).json({
             message: err
@@ -25,7 +44,10 @@ router.post('/', async (req,res) => {
 
     try {
         const savedTask = await task.save();
-        res.status(200).json(savedTask);
+        res.status(200).json({
+            data: savedTask,
+            status: true
+        });
     } catch (err) {
         res.status(404).json({
             message: err
@@ -50,6 +72,7 @@ router.get('/:taskId', async (req,res) => {
 router.delete('/:taskId', async (req,res) => {
     try {
         const task = await ToDo.deleteOne({_id: req.params.taskId});
+        console.log("delete is hit ");
         res.json(task);
     } catch(err) {
         res.json({
@@ -62,7 +85,7 @@ router.delete('/:taskId', async (req,res) => {
 
 router.patch('/:taskId', async (req,res) => {
     try {
-        const task = await ToDo.updateOne({_id: req.params.taskId}, { $set: {title: req.body.title} });
+        const task = await ToDo.updateOne({_id: req.params.taskId}, { $set: {status: req.body.status} });
         res.json(task);
     } catch (err) {
         res.json({

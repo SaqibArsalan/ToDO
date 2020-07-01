@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+      <!-- Required meta tags always come first -->
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+      <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css" >
+      <link rel="stylesheet" href="node_modules/bootstrap-social/bootstrap-social.css">
+
+      <link rel="stylesheet" href="css/styles.css">
+    <title>To Do</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+        <div class="container">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+           <a class="navbar-brand" href="#"></a>
+           <div class="collapse navbar-collapse" id="Navbar">
+            <ul class="navbar-nav mr-auto"> 
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active"><a class="nav-link" href="#"><span class="fa fa-home fa-lg"></span> Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./view-tasks.html"><span class="fa fa-eye fa-lg"></span> View Tasks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="./completed-task.html"><span class="fa fa-check fa-lg"></span> Completed Tasks</a></li>
+                    
+                </ul>  
+            </ul>
+        </div>
+                          
+        </div>
+    </nav>
+
+
+
+    <header class="jumbotron">
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-12">
+                    <h1>To Do Application</h1>
+                    <p>You can add and delete the tasks to be done!</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">     
+    <div class="row row-content">
+        <div class="col-12">
+            <div class="card">
+                <h3 class="card-header text-white">Add A Task</h3>
+                <div class="card-body">
+
+         <div class="col-12 col-sm-12 align-self-center">
+             <form id="add-task" method="POST"> 
+                
+                 <div class="form-group row">
+                     <div class="col-12 col-sm-10">
+                        <input class="form-control" type="text" name="task" id="task" value="" placeholder="Task" required>
+                    </div>
+                     <div class="col-12 col-sm">
+                        <button  id="task-btn"  type="submit" class="btn btn-success" formmethod="POST">Add </button>
+                    </div>
+                 </div>
+             </form>
+         </div>
+
+         </div>
+         </div>
+
+         </div>
+         </div>
+        
+    </div>
+
+
+ <!-- jQuery first, then Popper.js, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="js/toDo.js"></script>
+
+</body>
+
+</html>
