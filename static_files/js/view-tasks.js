@@ -18,7 +18,7 @@ $(document).ready(function() {
             {"data": "_id"},
             { "data":'title'},
             {"data":"_id","render": function (data, type, row, meta ) {
-                return '<button id="' + row._id + ' "class="btn btn-success badge-pill done" data-toggle="modal"  data-id="'+row._id+'"  data-target="#deleteModal" style="margin-left:3px";>MarkAsDone&nbsp<span class="fa fa-check fa-lg"></span></button>' +
+                return '<button id="' + row._id + ' "class="btn btn-success badge-pill done" data-toggle="modal"  data-id="'+row._id+'"  data-target="#taskModal" style="margin-left:3px";>MarkAsDone&nbsp<span class="fa fa-check fa-lg"></span></button>' +
                 '<button id="' + row._id + ' "class="btn btn-danger badge-pill delete" data-toggle="modal"  data-id="'+row._id +'"  data-target="#deleteModal" style="margin-left:3px";><span class="fa fa-trash fa-lg"></span></button>';
           }
         }
@@ -49,4 +49,24 @@ $(document).ready(function() {
             e.preventDefault();
         } );
     });
+
+    $("#taskModal").on('show.bs.modal', function (e) {
+        var triggerLink = $(e.relatedTarget);
+        var task_id = triggerLink.data("id");  
+        console.log("task id is ", task_id);      
+        
+        $("#done-task").click(function(e){
+  
+        $.ajax({
+                url:"/toDo/" + task_id,
+                type: "PATCH",
+                data: {status : true},
+                success: function(data) {         
+                window.location.reload();
+        }
+          
+        });
+        e.preventDefault();
+    } );
+});
 });

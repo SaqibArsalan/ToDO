@@ -78,6 +78,37 @@
         </div>
       </div>
 
+      <div class="modal fade modalEditClass" id="taskModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header text-center">
+              <h4 class="modal-title w-100 font-weight-bold text-secondary ml-5">Mark as Done</h4>
+              <button type="button" id="close-task" class="close text-secondary" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+<div class="modal-body mx-3 modal-inputs">
+
+        <form id="done-task-form" method="PATCH">
+               
+                        <div class="md-form mb-5">
+                                <label data-error="wrong" data-success="right" for="formNameEdit15">Are you sure to mark this task as done?</label>
+                              </div>
+                              
+
+            <div class="modal-footer d-flex justify-content-center editInsideWrapper">
+              <button id="done-task" formmethod="PATCH" type="button" class="btn btn-outline-secondary btn-block editInside" data-dismiss="modal">Mark Done
+
+                <i class="far fa-paper-plane ml-1"></i>
+              </button>
+                </div>
+        </form>        
+ </div>
+          </div>
+        </div>
+      </div>
+
+
 
 
     <header class="jumbotron">

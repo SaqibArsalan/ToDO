@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-//Completed Tasks
+//Get Completed Tasks
 router.get('/completed', async (req, res) => {
     try {
         const tasks = await ToDo.find({status: true});
@@ -37,6 +37,8 @@ router.get('/completed', async (req, res) => {
     }
 });
 
+
+//to post one item
 router.post('/', async (req,res) => {
     console.log("body is ", req.body);
     console.log("title", req.body.title);
