@@ -7,6 +7,8 @@ var router = express.Router();
 const cors = require('./cors');
 var jwt = require('jsonwebtoken');
 var config = require('../config');
+var bcrypt = require('bcrypt');
+
 router.use(bodyParser.json());
 
 
@@ -23,10 +25,16 @@ router.get('/',authenticate.verifyToken, function(req, res, next) {
   // res.send('respond with a resource');
 });
 
+router.post('/signup', (req,res) => {
+  var userData = [
+      req.body.username,
+      req.body.password
+  ]
+  user = userData;
+  console.log(req.body);
 
-router.post('/signup', function(req,res,next) {
-    console.log("sign up is hit");
-  User.register(new User({username: req.body.username}),
+  bcrypt.hash(user[1], 10, function(err, hash){
+    User.register(new User({username: req.body.username}),
    req.body.password, (err,user) => {
      if(err) {
        res.statusCode = 500;
@@ -36,10 +44,10 @@ router.post('/signup', function(req,res,next) {
      }
      else {
        if(req.body.username) {
-         user.username = req.body.username;
+         user.firstname = req.body.username;
        }
        if(req.body.password) {
-         user.password = req.body.password;
+         user.lastname = req.body.password;
        }
        user.save((err,user) => {
          if(err) {
@@ -48,20 +56,21 @@ router.post('/signup', function(req,res,next) {
           res.json({err: err});
           return ;
          }
-        passport.authenticate('local')(req,res,() => {
-          res.statusCode = 200;
+         else {
           res.setHeader('Content-Type', 'application/json');
           res.json({success: true, status: 'Registration successful!'});
-      
+         }
        });
        
-
-       });
      }
-    });
   });
 
-   
+});
+
+});
+
+
+
 //user login
 router.post('/login',(req,res) => {
 

@@ -25,9 +25,9 @@ app.use(express.static('static_files'));
 
 app.use('/users', userRoute);
 app.use('/toDo', task);
-app.use('/', (req, res) => {
+app.get('/',function(req,res) {
     res.redirect('./signUp.html');
-})
+});
 
 app.get('/logout',authenticate.verifyToken,(req,res)=>{
     console.log("logout hit");
