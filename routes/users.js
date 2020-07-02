@@ -1,16 +1,18 @@
 var express = require('express');
 const bodyParser = require('body-parser');
-var User = require('../models/user');
+var User = require('../models/User');
 var passport = require('passport');
 var authenticate = require('../authenticate');
 var router = express.Router();
 const cors = require('./cors');
+var jwt = require('jsonwebtoken');
+var config = require('../config');
 router.use(bodyParser.json());
 
 
 
 /* GET users listing. */
-router.get('/',cors.corsWithOptions,authenticate.verifyUser, function(req, res, next) {
+router.get('/',authenticate.verifyToken, function(req, res, next) {
   User.find({})
   .then((users) => {
     res.statusCode = 200;
@@ -22,7 +24,7 @@ router.get('/',cors.corsWithOptions,authenticate.verifyUser, function(req, res, 
 });
 
 
-router.post('/signup',cors.corsWithOptions, function(req,res,next) {
+router.post('/signup', function(req,res,next) {
     console.log("sign up is hit");
   User.register(new User({username: req.body.username}),
    req.body.password, (err,user) => {
@@ -60,17 +62,46 @@ router.post('/signup',cors.corsWithOptions, function(req,res,next) {
   });
 
    
+//user login
+router.post('/login',(req,res) => {
 
-router.post('/login',cors.corsWithOptions,passport.authenticate('local'),(req,res) => {
-    console.log("login is hit");
+  var userObj = {
+    "username" : req.body.username,
+    "password" : req.body.password
+  }
 
-  var token = authenticate.getToken({_id: req.user._id});//create token
+  var token = jwt.sign(userObj, config.secretKey, {expiresIn: '1h'});//create token
+  var now = new Date();
+  now.setTime(now.getTime() + 1 * 3600 * 1000);
+  res.cookie('token', token);
+  console.log("token is ", token);
   res.statusCode = 200;
   res.setHeader('Content-Type', 'application/json');
   res.json({success: true,token: token, status: 'You are successfully Login!'});
  
   
   
+});
+
+//user logout
+router.get('/logout',authenticate.verifyToken ,(req,res) => {
+  console.log("logout is hit");
+  if(req.session) {
+    req.session.destroy();
+    res.clearCookie('session-id');
+    res.status(200).json({
+      status: true
+    });
+  }
+  else {
+    var err = new Error('You are not logged in!');
+    res.status(403).json({
+      status: false,
+      data: err
+    });
+
+  }
+
 });
 
 

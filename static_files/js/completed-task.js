@@ -48,4 +48,21 @@ $(document).ready(function() {
             e.preventDefault();
         } );
     });
+
+    $('#logout').click(function(e){
+
+        $.ajax({
+            type :'GET',
+            url : '/logout',
+            success:(data) =>{
+                if(data.status) {
+                    console.log("logout completed");
+                    window.location.href = "/login.html"
+                }                
+            }
+
+    });
+    e.preventDefault();
+    });              
+
 });
