@@ -8,5 +8,6 @@ A web application that will add and delete user's to do items.
 4. This will install all the dependencies that are required to run the application.
 5. On the terminal, type "node app.js"
 6. This will run the application.
-7. On the url of your browser type "http://localhost:3000/signUp.html"
+7. On the url of your browser type "http://localhost:3000/signUp.html".
+8. The deployed app is available and ready to use at: https://secret-dusk-37213.herokuapp.com/
 
